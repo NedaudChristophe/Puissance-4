@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Puissance 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Puissance 4</h1>
+        
+        <div id="current-player" class="current-player {{ currentPlayer }}">
+            Tour du joueur : {{ currentPlayer == 'red' ? 'Rouge' : 'Jaune' }}
+        </div>
+
+        {% if winner %}
+            <div id="winner-message" class="status winner">
+                Le joueur {{ winner == 'red' ? 'Rouge' : 'Jaune' }} a gagné !
+            </div>
+        {% endif %}
+        
+        <div class="board">
+            {% for row in board %}
+                {% for cell in row %}
+                    <div class="cell {% if cell == 'red' %}red{% elseif cell == 'yellow' %}yellow{% endif %}"
+                         data-row="{{ loop.parent.loop.index0 }}"
+                         data-col="{{ loop.index0 }}"
+                         onclick="play({{ loop.index0 }})">
+                        {% if cell %}
+                            <div class="token"></div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="controls">
+            <button onclick="reset()">Nouvelle partie</button>
+        </div>
+    </div>
+
+    <script src="{{ asset('assets/js/game.js') }}"></script>
+</body>
+</html> 
