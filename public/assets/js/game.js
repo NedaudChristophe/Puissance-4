@@ -37,14 +37,16 @@ function updateBoard(board) {
         const col = parseInt(cell.dataset.col);
         const value = board[row][col];
         
-        cell.className = 'cell';
-        if (value === 'red') {
+        if (value === 'red' && !cell.classList.contains('red')) {
+            cell.className = 'cell';
             cell.classList.add('red');
             cell.innerHTML = '<div class="token"></div>';
-        } else if (value === 'yellow') {
+        } else if (value === 'yellow' && !cell.classList.contains('yellow')) {
+            cell.className = 'cell';
             cell.classList.add('yellow');
             cell.innerHTML = '<div class="token"></div>';
-        } else {
+        } else if (value === null && (cell.classList.contains('red') || cell.classList.contains('yellow'))) {
+            cell.className = 'cell';
             cell.innerHTML = '';
         }
     });
